@@ -16,6 +16,9 @@
       params[key] = value;
     });
 
+    console.log(params.url);
+    console.log(params.deeplink);
+
     if (isIOS) {
       // For iOS devices
       window.location = params.url;
