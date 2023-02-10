@@ -21,19 +21,17 @@
 
     if (isIOS) {
       // For iOS devices
-      window.location = params.url;
-      // setTimeout(function () {
-      //   window.location = params.url;
-      // }, 3000);
+      setTimeout(function () {
+        window.location = params.url;
+      }, 3000);
     } else if (isAndroid) {
       // For Android devices
-      window.location.href = params.deeplink.href;
+      window.location.href = params.deeplink + '#Intent;scheme=https;package=com.wildberries.ru;end;';
     } else {
       // For other devices or browsers
-      window.location = params.url;
-      // setTimeout(function () {
-      //   window.location = params.url;
-      // }, 3000);
+      setTimeout(function () {
+        window.location = params.url;
+      }, 3000);
     }
   </script>
 </body>
