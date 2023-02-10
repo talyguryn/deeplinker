@@ -18,17 +18,19 @@
 
     if (isIOS) {
       // For iOS devices
-      setTimeout(function () {
-        window.location = params.url;
-      }, 3000);
+      window.location = params.url;
+      // setTimeout(function () {
+      //   window.location = params.url;
+      // }, 3000);
     } else if (isAndroid) {
       // For Android devices
       window.location.href = params.deeplink;
     } else {
       // For other devices or browsers
-      setTimeout(function () {
-        window.location = params.url;
-      }, 3000);
+      window.location = params.url;
+      // setTimeout(function () {
+      //   window.location = params.url;
+      // }, 3000);
     }
   </script>
 </body>
