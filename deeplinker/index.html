@@ -9,16 +9,31 @@
 <body>
 
   <script type="text/javascript">
-    const params = {};
 
-    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) {
-      params[key] = value;
-    });
+    let isIOS = /(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent);
+    let isAndroid = /(Android)/i.test(navigator.userAgent);
 
-    window.location.href = params.deeplink;
-    setTimeout(function () {
-      window.location = params.url;
-    }, 3000);
+    if (isIOS) {
+      // For iOS devices
+      window.open(url);
+    } else if (isAndroid) {
+      // For Android devices
+      window.open(`intent://www.wildberries.ru/catalog/142202031/detail.aspx?size=240522367#Intent;scheme=https;package=com.wildberries.ru;end`);
+    } else {
+      // For other devices or browsers
+      window.open(url);
+    }
+
+    // const params = {};
+
+    // window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) {
+    //   params[key] = value;
+    // });
+
+    // window.location.href = params.deeplink;
+    // setTimeout(function () {
+    //   window.location = params.url;
+    // }, 3000);
   </script>
 </body>
 
