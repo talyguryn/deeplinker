@@ -9,8 +9,8 @@
 <body>
 
   <script type="text/javascript">
-    let getOS = function () {
-      const userAgent = window.navigator.userAgent,
+    const getOS = function () {
+      let userAgent = window.navigator.userAgent,
         platform = window.navigator.platform,
         macosPlatforms = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"],
         windowsPlatforms = ["Win32", "Win64", "Windows", "WinCE"],
