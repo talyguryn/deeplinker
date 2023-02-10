@@ -9,39 +9,87 @@
 <body>
 
   <script type="text/javascript">
-    const params = {};
-    let isIOS = /(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent);
-    let isAndroid = /(Android)/i.test(navigator.userAgent);
+    const getOS = function () {
+      const userAgent = window.navigator.userAgent,
+        platform = window.navigator.platform,
+        macosPlatforms = ["Macintosh", "MacIntel", "MacPPC", "Mac68K"],
+        windowsPlatforms = ["Win32", "Win64", "Windows", "WinCE"],
+        iosPlatforms = ["iPhone", "iPad", "iPod"],
+        os = null;
 
+      if (macosPlatforms.indexOf(platform) !== -1) {
+        os = "Mac OS";
+      } else if (iosPlatforms.indexOf(platform) !== -1) {
+        os = "iOS";
+      } else if (windowsPlatforms.indexOf(platform) !== -1) {
+        os = "Windows";
+      } else if (/Android/.test(userAgent)) {
+        os = "Android";
+      } else if (!os && /Linux/.test(platform)) {
+        os = "Linux";
+      }
+      return os;
+    }
+    const params = {};
     window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) {
       params[key] = value;
     });
+    const isAndroid = /(android)/i.test(navigator.userAgent);
+    const timer = null;
+    const redirect = function () {
 
-    console.log(params.url);
-    console.log(params.deeplink);
-    console.log(isIOS);
-    console.log(isAndroid);
-
-
-    window.location.href = params.deeplink;
-    setTimeout(function () {
-      window.location = params.url;
-    }, 500);
-
-    if (isIOS) {
-      // For iOS devices
-      setTimeout(function () {
-        window.location = params.deeplink;
-      }, 3000);
-    } else if (isAndroid) {
-      // For Android devices
-      window.location.href = params.deeplink;
-    } else {
-      // For other devices or browsers
-      setTimeout(function () {
+      if (isAndroid) {
+        window.location = `intent://${params.url}#Intent;package=com.wildberries.ru;scheme=https;S.browser_fallback_url=https://${params.url};end`;
+        timer = setTimeout(function () {
+          window.location = params.url;
+        }, 100);
+      } else {
         window.location = params.url;
-      }, 3000);
+        timer = setTimeout(function () {
+          window.location = params.url;
+        }, 100);
+      }
+
+      window.onbeforeunload = function () {
+        clearTimeout(timer);
+      };
     }
+    if (getOS() != "iOS") {
+      redirect();
+    }
+    // const params = {};
+    // let isIOS = /(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent);
+    // let isAndroid = /(Android)/i.test(navigator.userAgent);
+
+    // window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) {
+    //   params[key] = value;
+    // });
+
+    // console.log(params.url);
+    // console.log(params.deeplink);
+    // console.log(isIOS);
+    // console.log(isAndroid);
+
+
+    // window.location.href = params.deeplink;
+    // setTimeout(function () {
+    //   window.location = params.url;
+    // }, 500);
+
+    // if (isIOS) {
+    //   // For iOS devices
+    //   setTimeout(function () {
+    //     window.location = params.deeplink;
+    //   }, 3000);
+    // } else if (isAndroid) {
+    //   // For Android devices
+    //   window.location.href = params.deeplink;
+    // } else {
+    //   // For other devices or browsers
+    //   setTimeout(function () {
+    //     window.location = params.url;
+    //   }, 3000);
+    // }
   </script>
 </body>
 
