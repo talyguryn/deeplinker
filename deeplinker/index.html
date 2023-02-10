@@ -39,7 +39,7 @@
     const redirect = function () {
 
       if (isAndroid) {
-        window.location = `intent://${params.url}#Intent;package=com.wildberries.ru;scheme=https;S.browser_fallback_url=https://${params.url};end`;
+        window.location = `intent://${params.url}#Intent;package=com.wildberries.ru;end`;
         timer = setTimeout(function () {
           window.location = params.url;
         }, 100);
