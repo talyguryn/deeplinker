@@ -12,27 +12,45 @@
     const params = {};
     let isIOS = /(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent);
     let isAndroid = /(Android)/i.test(navigator.userAgent);
+
     window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) {
       params[key] = value;
     });
 
     console.log(params.url);
     console.log(params.deeplink);
+    console.log(isIOS);
+    console.log(isAndroid);
 
-    if (isIOS) {
-      // For iOS devices
-      setTimeout(function () {
-        window.location = params.url;
-      }, 3000);
-    } else if (isAndroid) {
-      // For Android devices
-      window.location.href = params.deeplink + '#Intent;scheme=https;package=com.wildberries.ru;end;';
-    } else {
-      // For other devices or browsers
-      setTimeout(function () {
-        window.location = params.url;
-      }, 3000);
-    }
+
+    window.location.href = params.deeplink;
+    setTimeout(function () {
+      window.location = params.url;
+    }, 500);
+    // const params = {};
+    // let isIOS = /(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent);
+    // let isAndroid = /(Android)/i.test(navigator.userAgent);
+    // window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) {
+    //   params[key] = value;
+    // });
+
+    // console.log(params.url);
+    // console.log(params.deeplink);
+
+    // if (isIOS) {
+    //   // For iOS devices
+    //   setTimeout(function () {
+    //     window.location = params.url;
+    //   }, 3000);
+    // } else if (isAndroid) {
+    //   // For Android devices
+    //   window.location.href = params.deeplink + '#Intent;scheme=https;package=com.wildberries.ru;end;';
+    // } else {
+    //   // For other devices or browsers
+    //   setTimeout(function () {
+    //     window.location = params.url;
+    //   }, 3000);
+    // }
   </script>
 </body>
 
